@@ -5,27 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     getDogs()
     
-    dogInputs[3].addEventListener('click',event=>{
-        event.preventDefault()
-        sumbitHandler()
-    })
+    // dogInputs[3].addEventListener('click',event=>{
+    //     event.preventDefault()
+    //     sumbitHandler()
+    // })
 
-    function sumbitHandler(){
-        let dog = {"name":dogInputs[0].value,"breed":dogInputs[1].value,"sex":dogInputs[2].value}
-        fetch(URL,{
-            method: "POST",
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dog)
-        })
-        .then(response=>response.json())
-        .then(dog=>{
-            console.log(dog)
-            renderDog(dog)
-        })
+    // function sumbitHandler(dog){
+    //     let dog = {"name":dogInputs[0].value,"breed":dogInputs[1].value,"sex":dogInputs[2].value}
+    //     fetch(URL,{
+    //         method: "POST",
+    //         headers:{
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(dog)
+    //     })
+    //     .then(response=>response.json())
+    //     .then(dog=>{
+    //         console.log(dog)
+    //         renderDog(dog)
+    //     })
     
-    }
+    // }
     
 
 
