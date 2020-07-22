@@ -23,8 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dogName = document.createElement('td');
         dogName.innerText = dog.name; 
         dogName.className= 'name'
-        dogName.id = (`${dog.id}`, 'hidden')
-        console.log(dogName)
+        dogName.id = dog.name
         tr.appendChild(dogName);
 
         const dogBreed = document.createElement('td')
@@ -54,45 +53,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const dogSexField = form[2] 
             dogSexField.value = event.target.parentNode.querySelector('.sex').innerText
+
+            document.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const dogForm = event.target
+        
+                const name = dogForm.name.value 
+                const breed = dogForm.breed.value
+                const sex = dogForm.sex.value 
+                
+                const dogObject = {name, breed, sex}
+                
+                dogForm.reset();
+                
+                // do a patch fetch request to change the data 
+                // once form is submitted, we have to show the changes. We could do another GET fetch request. 
+                
+                const actualId = button.id
+
+                const options = {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type' : 'application/json',
+                        'accept' : 'application/json'
+                    },
+                    body: JSON.stringify(dogObject)
+                }
+        
+                fetch((DOG_URL + actualId), options)
+                .then(resp => resp.json())
+                .then(newDogData => 
+                    getDogs()
+                    )
+            })
             
         })
         
         tbody.appendChild(tr)
     }
 
-    document.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const dogForm = event.target
-
-        const name = dogForm.name.value 
-        const breed = dogForm.breed.value
-        const sex = dogForm.sex.value 
-        
-        const dogObject = {name, breed, sex}
-        
-        dogForm.reset();
-        
-        // do a patch fetch request to change the data 
-        // once form is submitted, we have to show the changes. We could do another GET fetch request.  
-        
-        const dogId = document.getElementById(name)
-        console.log(dogId)
-        const entireDog = dogId.parentNode
-        const actualId = entireDog.querySelector('button').id
-
-        // const options = {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'content-type' : 'application/json',
-        //         'accept' : 'application/json'
-        //     },
-        //     body: JSON.stringify(dogObject)
-        // }
-
-        // fetch((DOG_URL + actualId), options)
-        // .then(resp => resp.json())
-        // .then(newDogData => console.log(newDogData))
-    })
+    
 
     getDogs();
 
