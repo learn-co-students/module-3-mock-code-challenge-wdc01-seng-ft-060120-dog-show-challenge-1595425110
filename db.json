@@ -14,20 +14,20 @@
     },
     {
       "id": 3,
-      "name": "Snickers",
-      "breed": "Dachshund",
+      "name": "Josie",
+      "breed": "Cavalier King Charles Spaniel",
       "sex": "female"
     },
     {
       "id": 4,
-      "name": "Harvey",
-      "breed": "Irish Spaniel",
+      "name": "Brody",
+      "breed": "Pomeranian",
       "sex": "male"
     },
     {
       "id": 5,
-      "name": "Gracie",
-      "breed": "Miniature Pinscher",
+      "name": "Stella",
+      "breed": "Cavalier King Charles Spaniel",
       "sex": "female"
     },
     {
