@@ -3,20 +3,20 @@
     {
       "id": 1,
       "name": "Baby",
-      "breed": "Scotish",
-      "sex": "male"
+      "breed": "Scottish Deerhound",
+      "sex": "female"
     },
     {
       "id": 2,
       "name": "Teddy",
       "breed": "Rhodesian Ridgeback",
-      "sex": "female"
+      "sex": "male"
     },
     {
       "id": 3,
       "name": "Snickers",
       "breed": "Dachshund",
-      "sex": "female"
+      "sex": "male"
     },
     {
       "id": 4,
@@ -38,9 +38,9 @@
     },
     {
       "id": 7,
-      "name": "Jerry",
+      "name": "Diamond",
       "breed": "Labrador",
-      "sex": "male"
+      "sex": "female"
     },
     {
       "id": 8,
@@ -70,7 +70,7 @@
       "id": 12,
       "name": "Misty",
       "breed": "Patterdale Terrier",
-      "sex": "female"
+      "sex": "male"
     },
     {
       "id": 13,
@@ -80,9 +80,9 @@
     },
     {
       "id": 14,
-      "name": "Coco",
-      "breed": "Maltese",
-      "sex": "female"
+      "name": "Jerry",
+      "breed": "Milestone",
+      "sex": "Undefined"
     },
     {
       "id": 15,

@@ -3,6 +3,7 @@ const dogsURL = baseURL + 'dogs/'
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchDogs()
+  editDogForm()
 })
 
 const fetchDogs = () => {
@@ -11,7 +12,7 @@ const fetchDogs = () => {
     .then(resp => resp.json())
     .then(dogs => {
       renderAllDogs(dogs)
-      console.log(dogs)
+      console.log('get request returns: ', dogs)
     })
 }
 
@@ -23,18 +24,22 @@ const renderDog = dog => {
   const dogTable = document.getElementById('table-body')
 
   const tableRow = document.createElement('tr')
+  tableRow.dataset.dogId = dog.id
   dogTable.appendChild(tableRow)
 
   const dataName = document.createElement('td')
   dataName.textContent = dog.name
+  dataName.classList += 'name'
   tableRow.appendChild(dataName)
 
   const dataBreed = document.createElement('td')
   dataBreed.textContent = dog.breed
+  dataBreed.classList += 'breed'
   tableRow.appendChild(dataBreed)
 
   const dataSex = document.createElement('td')
   dataSex.textContent = dog.sex
+  dataSex.classList += 'sex'
   tableRow.appendChild(dataSex)
 
   const editButton = document.createElement('button')
@@ -54,16 +59,20 @@ const handleButtonListener = (editButton, dog) => {
     editForm.breed.value = dog.breed
     editForm.sex.value = dog.sex
 
-    editDogForm(dog, editForm)
+    // gives the form a dataset of the dog id
+    editForm.dataset.dogId = dog.id
+
+    //editDogForm(dog, editForm)
   })
 }
 
-const editDogForm = dog => {
-  // grab form
+const editDogForm = () => {
   const form = document.getElementById('dog-form')
   // listen for submit
   form.addEventListener('submit', e => {
     e.preventDefault()
+    // grab form
+    const dogId = document.querySelector('form#dog-form').dataset.dogId
 
     // make patch request configuratino Object
     const patchRequest = {
@@ -83,15 +92,23 @@ const editDogForm = dog => {
     form.reset()
 
     // make a patch request to dogsURL
-    fetch(dogsURL + dog.id, patchRequest)
+    fetch(dogsURL + dogId, patchRequest)
       .then(resp => resp.json())
-      .then(reloadTable())
+      .then(dog => {
+        console.log('patch request returns: ', dog)
+        // reloadTable()
+        updateDogRow(dog)
+      })
   })
 }
 
-const reloadTable = () => {
-  const tableBody = document.getElementById('table-body')
+const updateDogRow = dog => {
+  //   const tableBody = document.getElementById('table-body')
+  // select dog row
+  const dogRow = document.querySelector(`tr[data-dog-id="${dog.id}"`)
 
-  tableBody.innerHTML = ''
-  fetchDogs()
+  // update row
+  dogRow.querySelector('.name').textContent = dog.name
+  dogRow.querySelector('.breed').textContent = dog.breed
+  dogRow.querySelector('.sex').textContent = dog.sex
 }
