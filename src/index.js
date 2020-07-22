@@ -44,6 +44,37 @@ function renderDog(dog){
     tableDataButton.append(button)
     tableRow.append(tableDataButton)
     console.log(tableBody)
-    
+
+
+    // create and event listener on edit button
+    button.addEventListener('click', function(){
+        editDog(dog)
+    }) 
 }
+    function edit(dog){
+        // create an event listener on the form
+        // make fetch PATCH resquest
+        const form = document.getElementById('dog-form')
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+            
+            fetchPatch(dog)
+        })
+
+        function fetchPatch(dog){
+            fetch(`${urlBase}/${dog.id}`,{
+                method: "PACHT",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "application/json",
+                },
+                body: JSON.stringify(dogI)
+            })
+        }
+        
+    }
+
+
+
+
 })
