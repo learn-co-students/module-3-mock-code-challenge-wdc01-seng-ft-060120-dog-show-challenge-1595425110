@@ -3,13 +3,10 @@ let dogsUrl = baseUrl + '/dogs'
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchDogs()
-    document.addEventListener("click", (event) => {
-        console.log(event.target)
-        if(event.target.value === "submit")
-            createNewDog()
-        if(event.target.textContent === "Edit Dog")
-            editDog()
-    })
+    // document.addEventListener("click", (event) => {
+        // if(event.target.value === "submit")
+        //     submitEditedDog()
+    // })
 });
 
 function fetchDogs() {
@@ -31,11 +28,13 @@ function renderDog(dog) {
     let editDog = document.createElement("td")
     let editDogBtn = document.createElement("button")
     dogRow.id = dog.name
+    editDogBtn.id = dog.name
 
     dogName.textContent = dog.name
     dogBreed.textContent = dog.breed
     dogSex.textContent = dog.sex
     editDogBtn.textContent = 'Edit Dog'
+    editDogBtn.id = `Edit ${dog.name}`
 
     tableBody.appendChild(dogRow)
     dogRow.appendChild(dogName)
@@ -43,12 +42,15 @@ function renderDog(dog) {
     dogRow.appendChild(dogSex)
     dogRow.appendChild(editDog)
     editDog.appendChild(editDogBtn)
+
+    document.addEventListener("click", (e) => {
+        if(e.target.id === `Edit ${dog.name}`)
+            populateDogForm(dog)
+    })
+
+    function populateDogForm(dog) {
+        let dogForm = document.getElementById("dog-form")
+        let field = dogForm.getElementByName("input")
+        console.log(field)
+    };
 };
-
-function createNewDog() {
-    preventDefault()
-}
-
-function editDog() {
-    console.log("I'm a good boy placeholder, woof")
-}
