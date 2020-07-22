@@ -45,25 +45,55 @@ const renderDog = dog => {
 }
 
 const handleButtons = () => {
-    document.addEventListener('click', function(e){
-        if(e.target.matches('.edit')){
-            // console.log(e.target.parentNode.parentNode) = whole row
-            const dogForm = document.querySelector('#dog-form')
-            const dogInfo = e.target.parentNode.parentNode
-            console.log(dogForm.name)
+    const dogForm = document.querySelector('#dog-form')
+        
+        document.addEventListener('click', function(e){
+            if(e.target.matches('.edit')){
+                // console.log(e.target.parentNode.parentNode) = whole row
+                const dogInfo = e.target.parentNode.parentNode
+                console.log(dog)
+                // console.log(dogForm.name)
+                
+                const grabDogName = dogInfo.children[0].innerText
+                const grabDogBreed = dogInfo.children[1].innerText
+                const grabDogSex = dogInfo.children[2].innerText
+                
+                dogForm.name.value = grabDogName
+                dogForm.breed.value = grabDogBreed
+                dogForm.sex.value = grabDogSex
+                dogForm.dataset.id = dogInfo.id
+                console.log(dogForm)
+            }
+        })
 
-            const grabDogName = dogInfo.children[0].innerText
-            const grabDogBreed = dogInfo.children[1].innerText
-            const grabDogSex = dogInfo.children[2].innerText
+        document.addEventListener('submit', function(e){
+            e.preventDefault()
+            // console.log(e.target)
+            const editedDogName = dogForm.name.value 
+            const editedDogBreed = dogForm.breed.value 
+            const editedDogSex = dogForm.sex.value
 
-            dogForm.name.value = grabDogName
-            dogForm.breed.value = grabDogBreed
-            dogForm.sex.value = grabDogSex
-        }
-    })
+            // console.log(editedDogName)
+            // console.log(editedDogBreed)
+            // console.log(editedDogSex)
 
-    document.addEventListener('submit', function(e){
-        e.preventDefault()
-        console.log(e.target)
-    })
+            const configurationObj = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: editedDogName,
+                    breed: editedDogBreed,
+                    sex: editedDogSex
+                })
+            }
+
+            fetch(dogsUrl, configurationObj)
+            .then(response => response.json())
+            .then(console.log)
+
+            dogForm.reset()
+        })
 }
