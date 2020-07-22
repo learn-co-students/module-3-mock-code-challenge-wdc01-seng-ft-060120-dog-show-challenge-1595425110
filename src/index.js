@@ -51,25 +51,31 @@ function renderDog(dog){
         editDog(dog)
     }) 
 }
-    function edit(dog){
+    function editDog(dog){
         // create an event listener on the form
         // make fetch PATCH resquest
         const form = document.getElementById('dog-form')
         form.addEventListener('submit', function(e){
             e.preventDefault()
             
-            fetchPatch(dog)
+            fetchPatch(dog, form)
         })
 
-        function fetchPatch(dog){
+        function fetchPatch(dog, form){
             fetch(`${urlBase}/${dog.id}`,{
                 method: "PACHT",
                 headers: {
                     "content-type": "application/json",
                     "accept": "application/json",
                 },
-                body: JSON.stringify(dogI)
+                body: JSON.stringify({
+                    name: "form.name.value",
+                    breed: "form.breed.value",
+                    sex: "form.sex.value",
+                })
             })
+            .then(resp => resp.json()
+            .then(dog => renderDog(dog)))
         }
         
     }
