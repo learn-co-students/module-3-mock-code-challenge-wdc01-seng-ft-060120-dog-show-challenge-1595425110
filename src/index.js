@@ -5,11 +5,13 @@ DOGSURL = "http://localhost:3000/dogs/"
 document.addEventListener('DOMContentLoaded', () => {
     const mainDogForm = document.getElementById("dog-form")
     
+    fetchDogs();
+
     mainDogForm.addEventListener("submit", (e) => {
         e.preventDefault()
         updateDog(e.target)
     })
-    fetchDogs();
+    
 
 })
 
@@ -19,33 +21,6 @@ function fetchDogs(){
     .then(dogs => {
         dogs.forEach(renderDog);
     })
-}
-
-function updateDog(dogFormData){
-    let dogId = dogFormData.children[3].dataset.id
-    let updatedDog = {
-        "name": dogFormData.name.value,
-        "breed": dogFormData.breed.value,
-        "sex": dogFormData.sex.value
-    }
-    let dogConfig = {
-        method: "PATCH",
-        
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-
-        body: JSON.stringify(updatedDog)
-    }
-    fetch(`${DOGSURL}${dogId}`, dogConfig)
-    .then(resp => resp.json())
-    .then(dog => {
-        let tableBody = document.getElementById("table-body")
-        tableBody.innerText = ""
-        fetchDogs()
-    })
-    dogFormData.reset()
 }
 
 function renderDog(dog){
@@ -82,4 +57,31 @@ function populateForm(tableRow, dog){
     dogForm.breed.value = tableRow.children[1].innerText
     dogForm.sex.value = tableRow.children[2].innerText
     dogForm.children[3].dataset.id = dog.id
+}
+
+function updateDog(dogFormData){
+    let dogId = dogFormData.children[3].dataset.id
+    let updatedDog = {
+        "name": dogFormData.name.value,
+        "breed": dogFormData.breed.value,
+        "sex": dogFormData.sex.value
+    }
+    let dogConfig = {
+        method: "PATCH",
+        
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+
+        body: JSON.stringify(updatedDog)
+    }
+    fetch(`${DOGSURL}${dogId}`, dogConfig)
+    .then(resp => resp.json())
+    .then(dog => {
+        let tableBody = document.getElementById("table-body")
+        tableBody.innerText = ""
+        fetchDogs()
+    })
+    dogFormData.reset()
 }
