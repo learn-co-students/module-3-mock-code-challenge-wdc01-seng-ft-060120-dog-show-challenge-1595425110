@@ -1,4 +1,4 @@
-const BASEURL = 'http://localhost:3000/dogs'
+const BASEURL = 'http://localhost:3000/dogs/'
 
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault()
@@ -55,7 +55,37 @@ let updateDogInfo = (dog) => {
     sexInput.value = dogSex.innerText
 
     let submitButton = editForm.querySelector('input[type="submit"]')
-    console.log(submitButton)
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        patchRequest(editForm, dog, nameInput, breedInput, sexInput)
+    })
+    
+}
+
+let patchRequest = (editForm, dog, nameInput, breedInput, sexInput) => {
+    let editDog = {
+        "name": nameInput.value,
+        "breed": breedInput.value,
+        "sex": sexInput.value
+    }
+
+    let options = {
+        method: 'PATCH',
+        headers: {
+            'content-type': 'application/json',
+            accepts: 'application/json'
+        },
+        body: JSON.stringify(editDog)
+    }
+    fetch(BASEURL + dog.dataset.id, options)
+    .then(response => response.json())
+    .then( dog => updateDogTable() )
+}
+
+let updateDogTable = () => {
+    let dogList = document.getElementById('table-body')
+    console.log(dogList.children)
+    // fetchAllDogs()
 }
 
 let fetchAllDogs = () => {
