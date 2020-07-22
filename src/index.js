@@ -61,8 +61,6 @@ const handleButtonListener = (editButton, dog) => {
 
     // gives the form a dataset of the dog id
     editForm.dataset.dogId = dog.id
-
-    //editDogForm(dog, editForm)
   })
 }
 
@@ -79,13 +77,13 @@ const editDogForm = () => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Accepts: 'application/json',
+        Accepts: 'application/json'
       },
       body: JSON.stringify({
         name: form.name.value,
         breed: form.breed.value,
-        sex: form.sex.value,
-      }),
+        sex: form.sex.value
+      })
     }
 
     //resets the form
@@ -103,7 +101,6 @@ const editDogForm = () => {
 }
 
 const updateDogRow = dog => {
-  //   const tableBody = document.getElementById('table-body')
   // select dog row
   const dogRow = document.querySelector(`tr[data-dog-id="${dog.id}"`)
 
@@ -111,4 +108,8 @@ const updateDogRow = dog => {
   dogRow.querySelector('.name').textContent = dog.name
   dogRow.querySelector('.breed').textContent = dog.breed
   dogRow.querySelector('.sex').textContent = dog.sex
+
+  // update the edit button listener so that it popluates the form correctly
+  const editButton = document.querySelector(`tr[data-dog-id="${dog.id}"] button`)
+  handleButtonListener(editButton, dog)
 }
