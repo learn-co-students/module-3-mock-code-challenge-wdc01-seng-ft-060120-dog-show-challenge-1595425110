@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const createEditButtonTd = (dog, tr) => {
-        // Creates a TD and edit button and appends the TD to the tr
+        // Creates a TD and edit button (with attributes) and appends the TD to the tr
         const editTd = document.createElement('td')
         const editButton = document.createElement('button');
         editButton.dataset.colName = 'edit-button'
@@ -104,8 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resetDogForm = () => {
         // Resetting the dog form 
-        // For some reason, the hidden ID field doesn't reset,
-        //    so we do that part manually.
+        // For some reason, the hidden ID field doesn't reset, so we do that part manually.
         dogForm.dogid.value = '';
         dogForm.reset();
     }
