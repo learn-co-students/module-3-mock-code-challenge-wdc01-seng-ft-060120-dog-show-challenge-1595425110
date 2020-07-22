@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch((DOG_URL + actualId), options)
                 .then(resp => resp.json())
                 .then(newDogData => 
+                    // refreshDogs()
                     getDogs()
                     )
             })
@@ -90,6 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         
         tbody.appendChild(tr)
+    }
+
+    const refreshDogs = () => {
+        let tbody = document.getElementById('table-body');
+        tbody.querySelectorAll('tr').forEach(tr => tr.remove());
+
     }
 
     

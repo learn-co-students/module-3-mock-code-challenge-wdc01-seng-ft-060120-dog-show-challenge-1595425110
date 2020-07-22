@@ -2,21 +2,21 @@
   "dogs": [
     {
       "id": 1,
-      "name": "dafds",
-      "breed": "Scottish Deerhound",
-      "sex": "male"
+      "name": "",
+      "breed": "",
+      "sex": ""
     },
     {
       "id": 2,
-      "name": "Teddy",
-      "breed": "Rhodesian Ridgeback",
+      "name": "fdsfsdsdf",
+      "breed": "Dachshund",
       "sex": "female"
     },
     {
       "id": 3,
-      "name": "Snickers",
-      "breed": "Dachshund",
-      "sex": "female"
+      "name": "",
+      "breed": "",
+      "sex": ""
     },
     {
       "id": 4,
