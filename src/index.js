@@ -8,8 +8,8 @@ const runner = () =>
 {  
   const tbody = getTbody();
   fetchThenRenderDogs(tbody);
-  document.addEventListener("click",clickHandler);
   document.addEventListener("submit",submitHandler);
+  document.addEventListener("click",clickHandler);
 }
 
 document.addEventListener('DOMContentLoaded', runner);
@@ -47,7 +47,7 @@ const submitHandler = (e) =>
 
   fetch(DOGS_URL + e.target.dataset.id,configObj)
   .then(r => r.json())
-  .then(fetchThenRenderDogs(getTbody()));
+  .then(dog => updateRow(dog));
 }
 
 
@@ -88,9 +88,22 @@ const renderDogs = (dogs,tbody) =>
 
 //renders dog to table
 const renderDog = (dog,tbody) =>
-{
+{      
   const tr = document.createElement("tr");
+  tr.innerHTML = "";
   tr.dataset.id = dog.id;
-  tr.innerHTML = `<tr><td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class="edit">Edit</button></td></tr>`;
+  setDogRow(dog,tr);
   tbody.append(tr);
+}
+
+const updateRow = (dog) =>
+{
+  const tr = getTbody().querySelector(`[data-id~="${dog.id}"]`);
+  console.log(dog);
+  setDogRow(dog,tr);
+}
+
+const setDogRow = (dog,tr) =>
+{
+  tr.innerHTML = `<td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class="edit">Edit</button></td>`;
 }
