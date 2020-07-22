@@ -119,6 +119,42 @@
       "name": "Coco",
       "breed": "Affenpinscher",
       "sex": "female"
+    },
+    {
+      "name": "Shawn",
+      "breed": "Scottish Deerhound",
+      "sex": "male",
+      "id": 21
+    },
+    {
+      "name": "Babae",
+      "breed": "Scottish Deerhound",
+      "sex": "male",
+      "id": 22
+    },
+    {
+      "name": "Teddies",
+      "breed": "Rhodesian Ridgeback",
+      "sex": "female",
+      "id": 23
+    },
+    {
+      "name": "Teddies",
+      "breed": "Rhodesian Ridgeback",
+      "sex": "female",
+      "id": 24
+    },
+    {
+      "name": "Babae",
+      "breed": "Scottish Deerhound",
+      "sex": "male",
+      "id": 25
+    },
+    {
+      "name": "Babae",
+      "breed": "Scottish Deerhound",
+      "sex": "male",
+      "id": 26
     }
   ]
 }

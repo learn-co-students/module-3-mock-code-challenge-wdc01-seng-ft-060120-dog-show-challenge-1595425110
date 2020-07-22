@@ -11,22 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     function sumbitHandler(){
-        // let dogForm = document.getElementById('dog-form')
-        // let dogInputs = dogForm.querySelectorAll('input')
-        let dog = {"name":dogInputs[0],"breed":dogInputs[1],"sex":dogInputs[2]}
-        console.log(dog)
-        // fetch(URL,{
-        //     method: "POST",
-        //     headers:{
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(dog)
-        // })
-        // .then(response=>response.json())
-        // .then(dog=>{
-        //     console.log(dog)
-        //     renderDog(dog)
-        // })
+        let dog = {"name":dogInputs[0].value,"breed":dogInputs[1].value,"sex":dogInputs[2].value}
+        fetch(URL,{
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dog)
+        })
+        .then(response=>response.json())
+        .then(dog=>{
+            console.log(dog)
+            renderDog(dog)
+        })
     
     }
     
@@ -71,10 +68,22 @@ function editDogHandler(dog){
     dogInputs[1].value = dog.breed
     dogInputs[2].value = dog.sex
     
-    // dogInputs[3].addEventListener('click', event=>{
-    //     event.preventDefault()
-    //     sumbitHandler(dog.id)
-    // })
+    dogInputs[3].addEventListener('click', event=>{
+        event.preventDefault()
+
+        fetch(URL+`/${dog.id}`,{
+            method: "PATCH",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dog)
+        })
+        .then(response=>response.json())
+        .then(dog=>{
+            console.log(dog)
+            renderDog(dog)
+        })
+    })
 }
 
         
