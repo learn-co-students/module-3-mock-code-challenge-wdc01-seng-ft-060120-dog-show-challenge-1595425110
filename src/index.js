@@ -84,8 +84,15 @@ let patchRequest = (editForm, dog, nameInput, breedInput, sexInput) => {
 
 let updateDogTable = () => {
     let dogList = document.getElementById('table-body')
-    console.log(dogList.children)
+    console.log(dogList)
+    // removeAllListItems(dogList)
     // fetchAllDogs()
+}
+
+let removeAllListItems = (dogList) => {
+    while (dogList.firstChild) {
+        dogList.removeChild(dogList.firstChild)
+    }
 }
 
 let fetchAllDogs = () => {
