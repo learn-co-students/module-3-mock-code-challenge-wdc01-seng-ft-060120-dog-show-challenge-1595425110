@@ -18,7 +18,7 @@ const clickHandler = (e) =>
 {
   const tgt = e.target;
   if (tgt.className === "edit")
-  {
+  { //parent's parent's data-id
     const ppId = tgt.parentElement.parentElement.dataset.id;
     if(!!ppId)
       fetchDogThenForm(ppId);
@@ -28,7 +28,9 @@ const clickHandler = (e) =>
 const submitHandler = (e) =>
 {
   e.preventDefault();
+  //array of 3 input tags [:name,:sex,:breed]
   const inp = e.target.children;
+
   const dogData =
   {
     name: inp[0].value,
@@ -50,7 +52,7 @@ const submitHandler = (e) =>
   .then(dog => updateRow(dog));
 }
 
-
+//(id:number) => [fetch a dog and use it to call func to populate form]
 const fetchDogThenForm = (id) =>
 {
   fetch(DOGS_URL + id)
@@ -58,6 +60,7 @@ const fetchDogThenForm = (id) =>
   .then(dog => populateEditForm(dog));
 }
 
+//(dog:json) => populated-form ('value's updated)
 const populateEditForm = (dog) =>
 {
   const form = document.getElementById("dog-form");
@@ -96,6 +99,7 @@ const renderDog = (dog,tbody) =>
   tbody.append(tr);
 }
 
+//(json-object) => updated-row
 const updateRow = (dog) =>
 {
   const tr = getTbody().querySelector(`[data-id~="${dog.id}"]`);
@@ -103,6 +107,7 @@ const updateRow = (dog) =>
   setDogRow(dog,tr);
 }
 
+//creates new row in tr with given dog json
 const setDogRow = (dog,tr) =>
 {
   tr.innerHTML = `<td>${dog.name}</td> <td>${dog.breed}</td> <td>${dog.sex}</td> <td><button class="edit">Edit</button></td>`;
