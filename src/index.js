@@ -50,7 +50,15 @@ function renderDog(dog) {
 
     function populateDogForm(dog) {
         let dogForm = document.getElementById("dog-form")
-        let field = dogForm.getElementByName("input")
-        console.log(field)
+        let field = dogForm.getElementsByTagName("input")
+        let nameField = field[0]
+        let breedField = field[1]
+        let sexField = field[2]
+
+        nameField.value = `${dog.name}`
+        breedField.value = `${dog.breed}`
+        sexField.value = `${dog.sex}`
     };
 };
+
+
