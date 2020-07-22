@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 // make fetch request to base_url
-// get access to div with class = "margin-flex"
-// get access to table with class = "margin"
-//get access to tr with class = "padding"
-// get access to th with class = "padding center"
 //render every register dog
 
 
@@ -22,8 +18,32 @@ function renderAllDogs(dogs){
 }
 
 function renderDog(dog){
-    const tableHead = document.querySelector(".padding")
-    tableHead.innerHTML = `${dog.name}`
-    console.log(tableHead)
+    // get access to table body with id = "table-body"
+    //<tr><td>Dog *Name*</td> <td>*Dog Breed*</td> <td>*Dog Sex*</td> <td><button>Edit</button></td></tr>
+    // create tr and append it to table body
+    // td and append it to tr
+    const tableBody = document.getElementById("table-body")
+    const tableRow = document.createElement('tr')
+    tableBody.append(tableRow)
+
+    const tableDataName = document.createElement('td')
+    tableRow.append(tableDataName)
+    tableRow.innerText = `${dog.name}`
+
+    const tableDataBreed = document.createElement('td')
+    tableDataBreed.innerText = `${dog.breed}`
+    tableRow.append(tableDataBreed)
+
+    const tableDataSex = document.createElement('td')
+    tableDataSex.innerText = `${dog.sex}`
+    tableRow.append(tableDataSex)
+
+    const tableDataButton = document.createElement('td')
+    const button = document.createElement('button')
+    button.innerText = "Edit"
+    tableDataButton.append(button)
+    tableRow.append(tableDataButton)
+    console.log(tableBody)
+    
 }
 })
